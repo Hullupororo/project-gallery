@@ -2,7 +2,6 @@ import { Router } from 'express';
 // import { Entry } from '../db/models';
 // import { deleteProtect } from '../middlewares';
 
-
 const router = Router();
 
 // router.route('/entries')

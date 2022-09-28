@@ -1,6 +1,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Posts', {
+    await queryInterface.createTable('Albums', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,27 +10,33 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
       },
-      body: {
-        type: Sequelize.STRING,
+      status: {
+        type: Sequelize.BOOLEAN,
       },
       userid: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: {
+            tableName: 'Users',
+          },
           key: 'id',
         },
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
+
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
+
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Posts');
+    await queryInterface.dropTable('Albums');
   },
 };
