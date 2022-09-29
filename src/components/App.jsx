@@ -5,6 +5,7 @@ import AuthPage from './auth/AuthPage';
 import MainPage from './MainPage';
 import MyNavBar from './MyNavBar';
 import RegistrationPage from './auth/RegistrationPage';
+import OneAlbum from './OneAlbum';
 
 export default function App({ user, albums }) {
   const [currUser, setCurrUser] = useState(user || {});
@@ -15,9 +16,10 @@ export default function App({ user, albums }) {
   };
   return (
     <Container>
-      <MyNavBar />
+      <MyNavBar currUser={currUser} logOutHandler={logOutHandler} />
       <Routes>
-        <Route path="/" element={<MainPage albums={albums} />} />
+        <Route path="/" element={<MainPage albums={albums} currUser={currUser} />} />
+        <Route path="/album/:id" element={<OneAlbum />} />
         <Route path="/user/registration" element={<RegistrationPage setCurrUser={setCurrUser} />} />
         <Route path="/user/authorization" element={<AuthPage setCurrUser={setCurrUser} />} />
       </Routes>

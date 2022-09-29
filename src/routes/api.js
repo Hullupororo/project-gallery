@@ -1,11 +1,26 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
-import { User, Album } from '../../db/models';
+import { User, Album, Photo } from '../../db/models';
 // import { Entry } from '../db/models';
 // import { deleteProtect } from '../middlewares';
 
 const router = Router();
 
+router.route('/albums')
+  .get(async (req, res) => {
+    const allAlbums = await Album.findAll({ where: { status: true }, order: [['id', 'DESC']] });
+    res.json(allAlbums);
+  })
+  .post(async (req, res) => {
+    const newAlbum = await Album.create({ title: 'New Album', status: true });
+    res.json(newAlbum);
+  });
+
+router.route('/photos/:id')
+  .get(async (req, res) => {
+    const { id } = req.params;
+    const photos = await Photo.findAll({ where });
+  });
 // router.route('/entries')
 //   .get(async (req, res) => {
 //     // const entries = await Entry.findAll({ order: [['id', 'DESC']] });
