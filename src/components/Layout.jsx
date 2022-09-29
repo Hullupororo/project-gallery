@@ -31,7 +31,7 @@ export default function Layout({ initState }) {
         {/* скрипты собранные через Webpack */}
         <script defer src="/js/app.js" />
         <script defer src="/js/vendor.js" />
-        <title>TEMPLATE</title>
+        <title>Gallery of Uniqmk</title>
       </head>
       <body>
         <div id="root">
