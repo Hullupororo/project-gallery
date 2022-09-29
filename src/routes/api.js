@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
+import multer from 'multer';
 import { User, Album, Photo } from '../../db/models';
 // import { Entry } from '../db/models';
 // import { deleteProtect } from '../middlewares';
 
 const router = Router();
+
+const upload = multer({ dest: './public/images' });
 
 router.route('/albums')
   .get(async (req, res) => {
@@ -19,8 +22,20 @@ router.route('/albums')
 router.route('/photos/:id')
   .get(async (req, res) => {
     const { id } = req.params;
-    const photos = await Photo.findAll({ where });
+    const photos = await Photo.findAll({ where: { albumid: id } });
+    res.json(photos);
   });
+
+router.post('/profile/:id', upload.single('avatar'), async (req, res, next) => {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any  //   const newPhoto = Photo.create({
+  //     albumid: 5,
+  //     link: req.file.filename,
+  //   });
+  await Photo.create({ link: req.file.filename });
+  res.json(req.file.filename);
+  next();
+});
 // router.route('/entries')
 //   .get(async (req, res) => {
 //     // const entries = await Entry.findAll({ order: [['id', 'DESC']] });
