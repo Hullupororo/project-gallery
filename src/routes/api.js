@@ -26,13 +26,13 @@ router.route('/photos/:id')
     res.json(photos);
   });
 
-router.post('/profile/:id', upload.single('avatar'), async (req, res, next) => {
+router.post('/profile/', upload.single('avatar'), async (req, res, next) => {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any  //   const newPhoto = Photo.create({
   //     albumid: 5,
   //     link: req.file.filename,
   //   });
-  await Photo.create({ link: req.file.filename });
+  await Photo.create({ albumid: 1, link: req.file.filename });
   res.json(req.file.filename);
   next();
 });
