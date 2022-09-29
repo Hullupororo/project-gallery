@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
-import MyPhotoCarousel from './MyCarousel';
+import MyPhotoCarousel from './MyPhotoCarousel';
 
 export default function OneAlbum() {
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
-
   useEffect(() => {
     fetch(`/api/photos/${id}`)
       .then((res) => res.json())
@@ -34,7 +33,6 @@ export default function OneAlbum() {
     <>
       <>
         <div className="buttons">
-
           <Button
             variant="dark"
             onClick={addAlbumHandler}
@@ -54,11 +52,7 @@ export default function OneAlbum() {
         <Carousel cols={2} rows={2} gap={20} loop>
           {photos.map((photo) => (
             <Carousel.Item>
-              <Link to="/dsfgfsfgds">
-                <Carousel.Item>
-                  <MyPhotoCarousel key={photo.id} album={photo} />
-                </Carousel.Item>
-              </Link>
+              <MyPhotoCarousel key={photo.id} photo={photo} />
             </Carousel.Item>
           ))}
         </Carousel>
