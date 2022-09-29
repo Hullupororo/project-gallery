@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
-import { User, Album } from '../../db/models';
+import { User } from '../../db/models';
 // import { Entry } from '../db/models';
 // import { deleteProtect } from '../middlewares';
 
