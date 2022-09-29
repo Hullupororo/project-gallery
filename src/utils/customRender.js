@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Layout from '../MyComponents/Layout';
+import Layout from '../DashaComponents/Layout';
 
 const customRender = (filePath, initState, cb) => {
   const layout = React.createElement(Layout, { initState });
