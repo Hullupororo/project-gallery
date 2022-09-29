@@ -1,5 +1,6 @@
 import React from 'react';
 import { StaticRouter } from 'react-router-dom/server';
+import { SSRProvider } from 'react-bootstrap';
 import App from './App';
 
 export default function Layout({ initState }) {
@@ -36,7 +37,9 @@ export default function Layout({ initState }) {
         <div id="root">
           {/* компонент обёртка StaticRouter для передачи маршрута клиентским роутерам */}
           <StaticRouter location={initState.path}>
-            <App {...initState} />
+            <SSRProvider>
+              <App {...initState} />
+            </SSRProvider>
           </StaticRouter>
         </div>
       </body>

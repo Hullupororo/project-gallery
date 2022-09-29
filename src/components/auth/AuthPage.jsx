@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function AuthPage({ setCurrUser }) {
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: '',
     password: '',
@@ -21,7 +22,8 @@ export default function AuthPage({ setCurrUser }) {
       body: JSON.stringify(input),
     })
       .then((res) => res.json())
-      .then((data) => setCurrUser(data));
+      .then((data) => setCurrUser(data))
+      .then(() => navigate('/'));
   };
 
   return (

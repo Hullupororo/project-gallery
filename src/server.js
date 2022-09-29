@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import path from 'path';
 import customRender from './utils/customRender';
 import indexRouter from './routes/index';
+import userRouter from './routes/userRouter';
 import apiRouter from './routes/api';
 // import { localsMiddle } from './middlewares';
 
@@ -31,12 +32,14 @@ app.use(session({
   store: new FileStore(),
   secret: 'fwefqwefqewf',
   saveUninitialized: false,
+  rename: true,
 }));
 
 // app.use(localsMiddle);
 
 app.use('/', indexRouter);
-app.use('/api/v1/', apiRouter);
+app.use('/user', userRouter);
+app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   console.log('Server start on', PORT);
