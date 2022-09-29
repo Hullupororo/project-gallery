@@ -32,7 +32,7 @@ app.use(session({
   store: new FileStore(),
   secret: 'fwefqwefqewf',
   saveUninitialized: false,
-  rename: true,
+  resave: true,
 }));
 
 // app.use(localsMiddle);
