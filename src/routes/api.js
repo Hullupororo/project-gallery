@@ -18,18 +18,25 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post('/profile', upload.single('avatar'), async (req, res, next) => {
-  await Photo.create({ albumid: 1, link: req.file.originalname });
+router.post('/photos/:id', upload.single('avatar'), async (req, res, next) => {
+  const { id } = req.params;
+  await Photo.create({ albumid: id, link: req.file.filename });
   next();
+});
+
+router.get('/onealbum/:id', async (req, res) => {
+  const { id } = req.params;
+  const oneAlbum = await Album.findOne({ where: id });
+  res.json(oneAlbum);
 });
 
 router.route('/albums')
   .get(async (req, res) => {
-    const allAlbums = await Album.findAll({ where: { status: true }, order: [['id', 'DESC']] });
+    const allAlbums = await Album.findAll({ where: { status: true }, include: [{ model: Photo }], order: [['id', 'DESC']] });
     res.json(allAlbums);
   })
   .post(async (req, res) => {
-    const newAlbum = await Album.create({ title: 'New Album', status: true });
+    const newAlbum = await Album.create({ title: 'New Album', status: true, userid: res.locals.user.id });
     res.json(newAlbum);
   });
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
 import { Button } from 'react-bootstrap';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import MyPhotoCarousel from './MyPhotoCarousel';
 
 export default function OneAlbum() {
@@ -13,22 +13,7 @@ export default function OneAlbum() {
       .then((data) => setPhotos(data));
   }, []);
 
-  // buttons
   const navigate = useNavigate();
-
-  const addAlbumHandler = (e) => {
-    e.preventDefault();
-    fetch('/api/newalbum', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(),
-    })
-      .then((res) => {
-        setAlbums((prev) => [...prev, res.data]);
-      });
-  };
 
   return (
     <>
@@ -36,14 +21,14 @@ export default function OneAlbum() {
         <div className="buttons">
           <Button
             variant="dark"
-            onClick={addAlbumHandler}
+            onClick={() => navigate(`/album/photo_edit/${id}`)}
           >
             Добавить фото
 
           </Button>
           <Button
             variant="dark"
-            onClick={addAlbumHandler}
+            onClick={() => navigate(`/album/edit/${id}`)}
           >
             Редактировать альбом
 
