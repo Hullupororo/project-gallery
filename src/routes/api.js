@@ -2,12 +2,25 @@ import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import multer from 'multer';
 import { User, Album, Photo } from '../../db/models';
-// import { Entry } from '../db/models';
-// import { deleteProtect } from '../middlewares';
+
+const path = require('path');
 
 const router = Router();
 
-const upload = multer({ dest: './public/images' });
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, './img');
+  },
+  filename(req, file, cb) {
+    cb(null, `${Date.now()}${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+router.post('/profile', upload.single('avatar'), async (req, res, next) => {
+  await Photo.create({ albumid: 1, link: req.file.originalname });
+  next();
+});
 
 router.route('/albums')
   .get(async (req, res) => {
@@ -26,39 +39,11 @@ router.route('/photos/:id')
     res.json(photos);
   });
 
-router.post('/profile/', upload.single('avatar'), async (req, res, next) => {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any  //   const newPhoto = Photo.create({
-  //     albumid: 5,
-  //     link: req.file.filename,
-  //   });
-  await Photo.create({ albumid: 1, link: req.file.filename });
-  res.json(req.file.filename);
-  next();
-});
-// router.route('/entries')
-//   .get(async (req, res) => {
-//     // const entries = await Entry.findAll({ order: [['id', 'DESC']] });
-//     // res.json(entries);
-//   })
-//   .post(deleteProtect, async (req, res) => {
-//     // await Entry.create(req.body);
-//     // res.sendStatus(200);
-//   });
+router.route('/takephoto/:link')
+  .get(async (req, res) => {
+    res.sendFile(path.join(__dirname, `../../img/${req.params.link}`));
+  });
 
-// router.route('/entries/:id')
-//   .get(async (req, res) => {
-//     // const entry = await Entry.findOne({ where: { id: req.params.id } });
-//     // res.json(entry);
-//   })
-//   .put(deleteProtect, async (req, res) => {
-//     // await Entry.update(req.body, { where: { id: req.params.id } });
-//     // res.sendStatus(200);
-//   })
-//   .delete(deleteProtect, async (req, res) => {
-//     // await Entry.destroy({ where: { id: req.params.id } });
-//     // res.sendStatus(200);
-//   });
 router.route('/auth/logout')
   .get((req, res) => {
     req.session.destroy();

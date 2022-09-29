@@ -6,7 +6,7 @@ router.get('/:id', (req, res) => {
   res.render('Layout', { });
 });
 
-router.get('/photos', (req, res) => {
+router.get('/photos/:id ', (req, res) => {
   res.render('Layout', { });
 });
 
