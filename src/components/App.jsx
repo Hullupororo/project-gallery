@@ -7,6 +7,7 @@ import MyNavBar from './MyNavBar';
 import RegistrationPage from './auth/RegistrationPage';
 import OneAlbum from './OneAlbum';
 import AddPhoto from './AddPhoto';
+import Albulm
 
 export default function App({ user, albums }) {
   const [currUser, setCurrUser] = useState(user || {});
@@ -22,6 +23,9 @@ export default function App({ user, albums }) {
         <Route path="/" element={<MainPage albums={albums} currUser={currUser} />} />
         <Route path="/album/:id" element={<OneAlbum />} />
         <Route path="/album/photos" element={<AddPhoto />} />
+        
+        <Route path="/album/edit/:id" element={<Albulmsetting />} />
+        <Route path="/album/photo_edit/:id" element={<AddPhoto />} />
 
         <Route path="/user/registration" element={<RegistrationPage setCurrUser={setCurrUser} />} />
         <Route path="/user/authorization" element={<AuthPage setCurrUser={setCurrUser} />} />

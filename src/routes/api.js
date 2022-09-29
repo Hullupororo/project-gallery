@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
 router.post('/profile', upload.single('avatar'), async (req, res, next) => {
   await Photo.create({ albumid: 1, link: req.file.originalname });
   next();
