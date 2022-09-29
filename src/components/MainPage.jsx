@@ -36,13 +36,12 @@ export default function MainPage({ currUser }) {
       && (
       <>
         <Button
+          className="addButton"
           variant="dark"
           onClick={addAlbumHandler}
-        >
-          Добавить альбом
-
-        </Button>
-        <h1>Мои альбомы</h1>
+        />
+        {/* Add Album */}
+        <h1 className="myalbum">Мои альбомы</h1>
         <Carousel cols={3} rows={1} gap={20} loop>
           {allAlbums.map((album) => (
             <Carousel.Item>
