@@ -15,7 +15,7 @@ export default function App({ user, albums }) {
   };
   return (
     <Container>
-      <MyNavBar />
+      <MyNavBar currUser={currUser} logOutHandler={logOutHandler} />
       <Routes>
         <Route path="/" element={<MainPage albums={albums} />} />
         <Route path="/user/registration" element={<RegistrationPage setCurrUser={setCurrUser} />} />
