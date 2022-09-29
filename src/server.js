@@ -31,12 +31,13 @@ app.use(session({
   store: new FileStore(),
   secret: 'fwefqwefqewf',
   saveUninitialized: false,
+  rename: true,
 }));
 
 // app.use(localsMiddle);
 
 app.use('/', indexRouter);
-app.use('/api/v1/', apiRouter);
+app.use('/api/', apiRouter);
 
 app.listen(PORT, () => {
   console.log('Server start on', PORT);

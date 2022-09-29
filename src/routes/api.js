@@ -1,9 +1,3 @@
-import { Router } from 'express';
-// import { Entry } from '../db/models';
-// import { deleteProtect } from '../middlewares';
-
-const router = Router();
-
 // router.route('/entries')
 //   .get(async (req, res) => {
 //     // const entries = await Entry.findAll({ order: [['id', 'DESC']] });
@@ -28,4 +22,4 @@ const router = Router();
 //     // res.sendStatus(200);
 //   });
 
-export default router;
+// export default router;
