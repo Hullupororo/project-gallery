@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 
 export default function Photosetting() {
-  // const [input, setInput] = useState({
-  //   name: '',
-  //   describe: '',
-  // });
-  // const inputHandler = (e) => {
-  //   setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  // };
+  const [input, setInput] = useState({
+    name: '',
+    describe: '',
+  });
+  const inputHandler = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   fetch('/api/photo', {
-  //     method: 'PUT',//Patch
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(input),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => setCurrUser(data));
-  // };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    fetch('/api/photo', {
+      method: 'PUT', // Patch
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(input),
+    })
+      .then((res) => res.json())
+      .then((data) => setCurrUser(data));
+  };
 
   return (
     <div className="row">
@@ -38,11 +38,11 @@ export default function Photosetting() {
           </div>
           <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Название фото</label>
-            <input value={input.name} name="name" onChange={changeHandler} type="text" className="form-control" id="exampleFormControlInput1" placeholder="Название альбома" />
+            <input value={input.name} name="name" onChange={inputHandler} type="text" className="form-control" id="exampleFormControlInput1" placeholder="Название альбома" />
           </div>
           <div className="mb-3">
             <label value="1" htmlFor="exampleFormControlInput1" className="form-label">Комментарий</label>
-            <input name="describe" value={input.describe} onChange={changeHandler} type="text" className="form-control" id="exampleFormControlInput1" placeholder="описание" />
+            <input name="describe" value={input.describe} onChange={inputHandler} type="text" className="form-control" id="exampleFormControlInput1" placeholder="описание" />
           </div>
           <div className="mb-4">
             <p />
