@@ -28,7 +28,7 @@ export default function RegistrationPage({ setCurrUser }) {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form className="inputs" onSubmit={submitHandler}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -62,8 +62,8 @@ export default function RegistrationPage({ setCurrUser }) {
           onChange={inputHandler}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="dark" type="submit">
+        Sign Up
       </Button>
     </Form>
   );

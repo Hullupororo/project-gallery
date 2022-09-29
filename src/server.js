@@ -5,7 +5,8 @@ import customRender from './utils/customRender';
 import indexRouter from './routes/index';
 import userRouter from './routes/userRouter';
 import apiRouter from './routes/api';
-// import { localsMiddle } from './middlewares';
+import albumRouter from './routes/albumRouter';
+import { localsMiddle } from './middlewares';
 
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
@@ -32,13 +33,14 @@ app.use(session({
   store: new FileStore(),
   secret: 'fwefqwefqewf',
   saveUninitialized: false,
-  rename: true,
+  resave: true,
 }));
 
-// app.use(localsMiddle);
+app.use(localsMiddle);
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/album', albumRouter);
 app.use('/api', apiRouter);
 
 app.listen(PORT, () => {

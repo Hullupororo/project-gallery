@@ -27,7 +27,7 @@ export default function AuthPage({ setCurrUser }) {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form className="inputs" onSubmit={submitHandler}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -50,8 +50,8 @@ export default function AuthPage({ setCurrUser }) {
           onChange={inputHandler}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
+      <Button variant="dark" type="submit">
+        Log In
       </Button>
     </Form>
   );
