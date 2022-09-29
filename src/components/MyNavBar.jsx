@@ -5,9 +5,13 @@ import React from 'react';
 
 function MyNavBar({ currUser, logOutHandler }) {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="navbar" bg="light" expand="lg">
       <Container>
-        <Navbar.Brand link to="/">Gallery</Navbar.Brand>
+        <Navbar.Brand>
+          {' '}
+          <NavLink className="logo" to="/">Gallery</NavLink>
+          {' '}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav-link">
@@ -15,11 +19,10 @@ function MyNavBar({ currUser, logOutHandler }) {
           </Nav>
 
           <Nav className="me-auto">
-            <NavLink className="nav-link" to="/">Home</NavLink>
             {currUser.id
               ? (
                 <>
-                  <Nav className="pipe-separate t-light-green left">
+                  <Nav className="pipe-separate mgL t-light-green left">
                     <Button className="nav-link" onClick={logOutHandler} variant="light">
                       Logout
                     </Button>

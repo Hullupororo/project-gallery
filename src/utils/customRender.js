@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-
 import Layout from '../components/Layout';
 
 const customRender = (filePath, initState, cb) => {
