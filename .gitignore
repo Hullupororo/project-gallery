@@ -10,6 +10,7 @@ public/js/app.js
 public/js/vendor.js
 src/myсomp
 src/DashaComponents
+img
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

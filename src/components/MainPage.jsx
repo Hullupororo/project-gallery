@@ -3,18 +3,9 @@ import Carousel from 'better-react-carousel';
 import { Button } from 'react-bootstrap';
 import MyCarousel from './MyCarousel';
 
-export default function MainPage({ currUser }) {
-  const [myAlbums, setMyAlbums] = useState([]);
-  const [allAlbums, setAllAlbums] = useState([]);
-  useEffect(() => {
-    fetch('/api/albums')
-      .then((res) => res.json())
-      .then((data) => {
-        setAllAlbums(data);
-        setMyAlbums(data.filter((el) => el.id === currUser.id));
-      });
-  }, []);
-
+export default function MainPage({
+  currUser, setAllAlbums, allAlbums, myAlbums, setMyAlbums,
+}) {
   const addAlbumHandler = (e) => {
     e.preventDefault();
     fetch('/api/albums', {
@@ -30,7 +21,6 @@ export default function MainPage({ currUser }) {
         setMyAlbums((prev) => [data, ...prev]);
       });
   };
-
   return (
     <>
       {currUser.id
@@ -47,7 +37,11 @@ export default function MainPage({ currUser }) {
         <Carousel className="carousel" cols={3} rows={1} gap={20} loop>
           {myAlbums.map((album) => (
             <Carousel.Item>
-              <MyCarousel key={album.id} album={album} />
+              {myAlbums.length !== 0
+                ? (<MyCarousel key={album.id} album={album} />)
+                : (<div className="none" />)}
+              {' '}
+              (// Даша это тебе задать высоту)
             </Carousel.Item>
           ))}
         </Carousel>

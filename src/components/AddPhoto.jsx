@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-export default function AddPhoto() {
+export default function AddPhoto({ handleClose }) {
   const param = useParams();
-  const navigate = useNavigate();
   const form = useRef(null); const submitHandler = (e) => {
     e.preventDefault();
     const data = new FormData(form.current);
@@ -13,7 +12,7 @@ export default function AddPhoto() {
       body: data,
     })
       .then((res) => res.json())
-      .then(navigate('/'));
+      .then(handleClose());
   };
   return (
     <div>
