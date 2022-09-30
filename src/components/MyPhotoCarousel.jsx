@@ -3,7 +3,6 @@ import Carousel from 'better-react-carousel';
 import { Link } from 'react-router-dom';
 
 export default function MyPhotoCarousel({ photo }) {
-  console.log(photo);
   return (
     <Link to="/">
       <Carousel.Item>

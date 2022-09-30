@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
-import { Button } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
+// import { Button } from 'react-bootstrap';
+import { useParams, useNavigate } from 'react-router-dom';
 import MyPhotoCarousel from './MyPhotoCarousel';
 
 export default function OneAlbum() {

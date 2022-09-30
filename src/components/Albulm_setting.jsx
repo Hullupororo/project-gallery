@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function Albulmsetting() {
+  const [album, setAlbum] = useState({});
   const [input, setInput] = useState({
-    name: '',
-    describe: '',
-    status: '',
+    title: album.title || '',
+    status: album.status || true,
   });
+  console.log(input);
+  const params = useParams();
+
+  useEffect(() => {
+    fetch(`/api/onealbum/${params.id}`)
+      .then((data) => data.json())
+      .then((data) => {
+        setAlbum(data);
+        setInput({ title: data.title, status: data.status });
+      });
+  }, []);
+
   const inputHandler = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
   const submitHandler = (e) => {
     e.preventDefault();
     fetch('/api/album', {
@@ -19,9 +31,10 @@ export default function Albulmsetting() {
       },
       body: JSON.stringify(input),
     })
-      .then((res) => res.json())
-      .then((data) => setCurrUser(data));
+      .then((res) => res.json());
+    // .then((data) => setCurrUser(data));
   };
+
   return (
     <div className="row">
       <div className="col">
@@ -30,14 +43,10 @@ export default function Albulmsetting() {
             <label htmlFor="exampleFormControlInput1" className="form-label">Название альбома</label>
             <input value={input.name} onChange={inputHandler} name="name" type="text" className="form-control" id="exampleFormControlInput1" placeholder="Название альбома" />
           </div>
-          <div className="mb-3">
-            <label value="1" htmlFor="exampleFormControlInput1" className="form-label">Описание</label>
-            <input name="describe" value={input.name} onChange={inputHandler} type="text" className="form-control" id="exampleFormControlInput1" placeholder="описание" />
-          </div>
+
           <p>Доступ</p>
           <div className="form-check">
             <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="me" />
-
             <label className="form-check-label" htmlFor="flexRadioDefault1">
               Только мне
             </label>

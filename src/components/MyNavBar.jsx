@@ -5,7 +5,7 @@ import React from 'react';
 
 function MyNavBar({ currUser, logOutHandler }) {
   return (
-    <Navbar className="navbar" bg="light" expand="lg">
+    <Navbar className="navbar" expand="lg">
       <Container className="header">
         <Navbar.Brand>
           {' '}
@@ -23,7 +23,7 @@ function MyNavBar({ currUser, logOutHandler }) {
               ? (
                 <>
                   <Nav className="pipe-separate mgL t-light-green left">
-                    <Button className="nav-link" onClick={logOutHandler} variant="light">
+                    <Button className="nav-link" onClick={logOutHandler} variant="link">
                       Logout
                     </Button>
                   </Nav>
