@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Albulmsetting() {
   const [album, setAlbum] = useState({});
@@ -7,11 +7,12 @@ export default function Albulmsetting() {
     title: album.title || '',
     status: album.status || true,
   });
-  console.log(input);
-  const params = useParams();
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`/api/onealbum/${params.id}`)
+    fetch(`/api/onealbum/${id}`)
       .then((data) => data.json())
       .then((data) => {
         setAlbum(data);
@@ -22,17 +23,26 @@ export default function Albulmsetting() {
   const inputHandler = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    fetch('/api/album', {
-      method: 'PATCH', // PUT
+    fetch(`/api/albums/${id}`, {
+      method: 'POST', // PUT
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(input),
     })
-      .then((res) => res.json());
-    // .then((data) => setCurrUser(data));
+      .then(() => {
+        setInput((prev) => prev.map((el) => {
+          if (el.id == id) {
+            return input;
+          }
+          return el;
+        }));
+        navigate('/');
+      })
+      .catch(console.log);
   };
 
   return (
@@ -41,7 +51,15 @@ export default function Albulmsetting() {
         <form onSubmit={submitHandler}>
           <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Название альбома</label>
-            <input value={input.name} onChange={inputHandler} name="name" type="text" className="form-control" id="exampleFormControlInput1" placeholder="Название альбома" />
+            <input
+              value={input.title}
+              onChange={inputHandler}
+              name="title"
+              type="text"
+              className="form-control"
+              id="exampleFormControlInput1"
+              placeholder={`${input.title}`}
+            />
           </div>
 
           <p>Доступ</p>
