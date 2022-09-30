@@ -26,7 +26,7 @@ router.post('/photos/:id', upload.single('avatar'), async (req, res, next) => {
 
 router.get('/onealbum/:id', async (req, res) => {
   const { id } = req.params;
-  const oneAlbum = await Album.findOne({ where: id });
+  const oneAlbum = await Album.findOne({ where: { id } });
   res.json(oneAlbum);
 });
 
