@@ -25,7 +25,6 @@ export default function RegistrationPage({ setCurrUser, setMyAlbums }) {
       .then((res) => res.json())
       .then((data) => {
         setCurrUser(data);
-        setMyAlbums()
       })
       .then(() => navigate('/'));
   };

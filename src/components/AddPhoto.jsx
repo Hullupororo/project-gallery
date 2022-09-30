@@ -14,8 +14,11 @@ export default function AddPhoto({ handleClose, setAllAlbums, setMyAlbums }) {
       encType: 'multipart/form-data',
       body: data,
     })
-      .then((res) => res.json())
-      .then(handleClose());
+      .then((res) => {
+        handleClose();
+        res.json()
+      })
+      // .then(handleClose());
   };
   return (
     <div>

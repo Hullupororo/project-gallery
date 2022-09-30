@@ -15,6 +15,7 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: "cascade"
       },
       link: {
         type: Sequelize.STRING,

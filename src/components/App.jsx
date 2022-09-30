@@ -18,9 +18,20 @@ export default function App({ user, albums }) {
       .then((res) => res.json())
       .then((data) => {
         setAllAlbums(data);
-        setMyAlbums(data.filter((el) => el.userid === currUser.id));
+        // setMyAlbums(data.filter((el) => el.userid === currUser.id));
       });
   }, [currUser]);
+
+  if (currUser) {
+    useEffect(() => {
+      fetch('/api/myalbums')
+        .then((res) => res.json())
+        .then((data) => {
+  
+          setMyAlbums(data);
+        });
+    }, [currUser]);
+  }
 
   const logOutHandler = () => {
     fetch('/api/auth/logout')
