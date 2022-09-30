@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-export default function Albulmsetting() {
+export default function Albulmsetting({ setAllAlbums, setMyAlbums }) {
   const [album, setAlbum] = useState({});
   const [input, setInput] = useState({
     title: album.title || '',
-    status: album.status || true,
+    status: album.status || false,
   });
 
   const { id } = useParams();
@@ -34,16 +34,12 @@ export default function Albulmsetting() {
       },
       body: JSON.stringify(input),
     })
-      .then(() => {
-        setInput((prev) => prev.map((el) => {
-          if (el.id == id) {
-            return input;
-          }
-          return el;
-        }));
-        navigate('/');
+      .then((res) => res.json())
+      .then((data) => {
+        setAllAlbums(data);
+        setMyAlbums(data);
       })
-      .catch(console.log);
+      .then(navigate('/'));
   };
 
   return (

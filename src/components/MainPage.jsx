@@ -6,6 +6,15 @@ import MyCarousel from './MyCarousel';
 export default function MainPage({
   currUser, setAllAlbums, allAlbums, myAlbums, setMyAlbums,
 }) {
+  useEffect(() => {
+    fetch('/api/albums')
+      .then((res) => res.json())
+      .then((data) => {
+        setAllAlbums(data);
+        setMyAlbums(data.filter((el) => el.userid === currUser.id));
+      });
+  }, []);
+
   const addAlbumHandler = (e) => {
     e.preventDefault();
     fetch('/api/albums', {
@@ -35,6 +44,7 @@ export default function MainPage({
           />
         </div>
         <Carousel className="carousel" cols={3} rows={1} gap={20} loop>
+
           {myAlbums.length !== 0
             ? (myAlbums.map((album) => (
               <Carousel.Item>

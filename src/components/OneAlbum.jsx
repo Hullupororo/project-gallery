@@ -6,8 +6,10 @@ import Modal from 'react-bootstrap/Modal';
 import MyPhotoCarousel from './MyPhotoCarousel';
 import AddPhoto from './AddPhoto';
 
+
 export default function OneAlbum({ currUser, myAlbums }) {
   const navigate = useNavigate();
+
   const [photos, setPhotos] = useState([]);
   const [currAlbum, setCurrAlbum] = useState({});
   const { id } = useParams();
@@ -26,8 +28,6 @@ export default function OneAlbum({ currUser, myAlbums }) {
           .then((data) => setCurrAlbum(data)),
       );
   }, [show]);
-
-  // buttons
 
   const addAlbumHandler = (e) => {
     e.preventDefault();

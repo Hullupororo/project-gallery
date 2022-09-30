@@ -20,7 +20,7 @@ export default function App({ user, albums }) {
         setAllAlbums(data);
         setMyAlbums(data.filter((el) => el.userid === currUser.id));
       });
-  }, []);
+  }, [currUser]);
 
   const logOutHandler = () => {
     fetch('/api/auth/logout')
@@ -54,10 +54,10 @@ export default function App({ user, albums }) {
         />
         <Route path="/album/photos" element={<AddPhoto />} />
 
-        <Route path="/album/edit/:id" element={<Albumsetting />} />
-        <Route path="/album/photo_edit/:id" element={<AddPhoto />} />
+        <Route path="/album/edit/:id" element={<Albumsetting setMyAlbums={setMyAlbums} setAllAlbums={setAllAlbums} />} />
+        <Route path="/album/photo_edit/:id" element={<AddPhoto setMyAlbums={setMyAlbums} setAllAlbums={setAllAlbums} />} />
 
-        <Route path="/user/registration" element={<RegistrationPage setCurrUser={setCurrUser} />} />
+        <Route path="/user/registration" element={<RegistrationPage setCurrUser={setCurrUser} setMyAlbums={setMyAlbums} />} />
         <Route path="/user/authorization" element={<AuthPage setCurrUser={setCurrUser} />} />
       </Routes>
     </Container>

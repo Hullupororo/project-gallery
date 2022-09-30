@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 
-export default function AddPhoto({ handleClose }) {
+export default function AddPhoto({ handleClose, setAllAlbums, setMyAlbums }) {
   const param = useParams();
-  const form = useRef(null); const submitHandler = (e) => {
+  const form = useRef(null);
+  const submitHandler = (e) => {
     e.preventDefault();
     const data = new FormData(form.current);
     fetch(`/api/photos/${param.id}`, {

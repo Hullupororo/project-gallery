@@ -42,6 +42,7 @@ router.route('/albums')
     res.json(newAlbum);
   });
 
+
 router.route('/albums/:id')
   .post(async (req, res) => {
     const all = await Album.update({
@@ -57,7 +58,7 @@ router.route('/albums/:id')
 router.route('/photos/:id')
   .get(async (req, res) => {
     const { id } = req.params;
-    const photos = await Photo.findAll({ where: { albumid: id } });
+    const photos = await Photo.findAll({ where: { albumid: id }, order: [['id', 'DESC']] });
     res.json(photos);
   });
 
