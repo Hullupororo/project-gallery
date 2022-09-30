@@ -60,8 +60,8 @@ router.route('/albums/:id')
 
     res.json(allAlbums);
   })
-  .delete(deleteProtect, async (req, res) => {
-    await Album.destroy({ where: { id: req.params.id, userid: req.session.user.id } });
+  .delete(async (req, res) => {
+    await Album.destroy({ where: { id: req.params.id } });
     res.sendStatus(200);
   });
 

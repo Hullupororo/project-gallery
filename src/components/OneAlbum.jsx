@@ -43,7 +43,7 @@ export default function OneAlbum({ currUser, myAlbums }) {
       });
   };
   const deleteHandler = () => {
-    fetch(`/api/entries/${id}`, { method: 'delete' })
+    fetch(`/api/albums/${id}`, { method: 'delete' })
       .then(() => navigate('/'));
   };
   return (
