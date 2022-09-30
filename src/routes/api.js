@@ -34,21 +34,31 @@ router.get('/onealbum/:id', async (req, res) => {
 
 router.route('/albums')
   .get(async (req, res) => {
-    const allAlbums = await Album.findAll({ where: { status: true }, include: [{ model: Photo }], order: [['id', 'DESC']] });
+    const allAlbums = await Album.findAll({ where: { status: 'true' }, include: [{ model: Photo }], order: [['id', 'DESC']] });
     res.json(allAlbums);
   })
   .post(async (req, res) => {
-    const newAlbum = await Album.create({ title: 'New Album', status: true, userid: res.locals.user.id });
+    const newAlbum = await Album.create({ title: 'New Album', status: 'true', userid: res.locals.user.id });
     res.json(newAlbum);
+  });
+
+  router.get('/myalbums', async (req, res) => {
+    if (res.locals.user) {
+
+      const allAlbums = await Album.findAll({ where: { userid: res.locals.user.id }, include: [{ model: Photo }], order: [['id', 'DESC']] });
+      res.json(allAlbums)
+    }
   });
 
 
 router.route('/albums/:id')
   .post(async (req, res) => {
-    const all = await Album.update({
+    await Album.update({
       ...req.body,
     }, { where: { id: req.params.id } });
-    res.sendStatus(200);
+    const allAlbums = await Album.findAll({ where: { status: 'true' }, include: [{ model: Photo }], order: [['id', 'DESC']] });
+
+    res.json(allAlbums);
   })
   .delete(deleteProtect, async (req, res) => {
     await Album.destroy({ where: { id: req.params.id, userid: req.session.user.id } });

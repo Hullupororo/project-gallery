@@ -6,7 +6,7 @@ export default function Albulmsetting({ setAllAlbums, setMyAlbums }) {
   const [album, setAlbum] = useState({});
   const [input, setInput] = useState({
     title: album.title || '',
-    status: album.status || false,
+    status: album.status || '',
   });
 
   const { id } = useParams();
@@ -41,7 +41,6 @@ export default function Albulmsetting({ setAllAlbums, setMyAlbums }) {
       })
       .then(navigate('/'));
   };
-
   return (
     <div className="row">
       <div className="col">
@@ -61,15 +60,15 @@ export default function Albulmsetting({ setAllAlbums, setMyAlbums }) {
 
           <p>Access Settings</p>
           <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="me" />
+            <input onChange={inputHandler} className="form-check-input" type="radio" name="status" id="flexRadioDefault1" value="true" />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
-              Private
+              Public
             </label>
           </div>
           <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="all" checked />
+            <input onChange={inputHandler} className="form-check-input" type="radio" name="status" id="flexRadioDefault2" value="false"  />
             <label className="form-check-label" htmlFor="flexRadioDefault2">
-              Public
+              Private
             </label>
           </div>
           <Button className="margin" type="submit" variant="dark">Save</Button>

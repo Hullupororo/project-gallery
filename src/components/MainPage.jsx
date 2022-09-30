@@ -11,7 +11,16 @@ export default function MainPage({
       .then((res) => res.json())
       .then((data) => {
         setAllAlbums(data);
-        setMyAlbums(data.filter((el) => el.userid === currUser.id));
+        // setMyAlbums(data.filter((el) => el.userid === currUser.id));
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/myalbums')
+      .then((res) => res.json())
+      .then((data) => {
+
+        setMyAlbums(data);
       });
   }, []);
 
@@ -32,7 +41,7 @@ export default function MainPage({
   };
   return (
     <>
-      {currUser.id
+      {currUser.id 
       && (
       <>
         <div className="head">
@@ -45,12 +54,12 @@ export default function MainPage({
         </div>
         <Carousel className="carousel" cols={3} rows={1} gap={20} loop>
 
-          {myAlbums.length !== 0
-            ? (myAlbums.map((album) => (
+          {myAlbums?.length !== 0
+            ? (myAlbums?.map((album) => (
               <Carousel.Item>
-                (
+                
                 <MyCarousel key={album.id} album={album} />
-                )
+                
                 {' '}
               </Carousel.Item>
             )))
