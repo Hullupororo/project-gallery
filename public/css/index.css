@@ -18,7 +18,9 @@ font-weight:lighter;
 font-style: oblique;
 color: #91919179;
 }
-
+.photo {
+    margin-bottom: 30px;
+}
 .main-blok {
     width: 100%;
 }

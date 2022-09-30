@@ -65,6 +65,7 @@ export default function RegistrationPage({ setCurrUser }) {
       <Button variant="dark" type="submit">
         Sign Up
       </Button>
+
     </Form>
   );
 }

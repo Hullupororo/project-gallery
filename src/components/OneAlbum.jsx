@@ -16,8 +16,6 @@ export default function OneAlbum({ currUser, myAlbums }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(currUser.id, currAlbum.userid);
-
   useEffect(() => {
     fetch(`/api/photos/${id}`)
       .then((res) => res.json())
@@ -96,7 +94,7 @@ export default function OneAlbum({ currUser, myAlbums }) {
         </Modal.Footer>
       </Modal>
 
-      <h1>Photos</h1>
+      <h1 className="photo">Photos</h1>
       <Carousel cols={2} rows={2} gap={20} loop>
         {photos.map((photo) => (
           <Carousel.Item>
