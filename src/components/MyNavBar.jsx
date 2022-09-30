@@ -5,8 +5,8 @@ import React from 'react';
 
 function MyNavBar({ currUser, logOutHandler }) {
   return (
-    <Navbar className="navbar" bg="light" expand="lg">
-      <Container>
+    <Navbar className="navbar" expand="lg">
+      <Container className="header">
         <Navbar.Brand>
           {' '}
           <NavLink className="logo" to="/">Gallery</NavLink>
@@ -15,7 +15,7 @@ function MyNavBar({ currUser, logOutHandler }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav-link">
-            {currUser.id ? currUser.name : 'Hello, photographer!'}
+            {currUser.id ? `of ${currUser.name}` : 'Hello, photographer!'}
           </Nav>
 
           <Nav className="me-auto">
@@ -23,7 +23,7 @@ function MyNavBar({ currUser, logOutHandler }) {
               ? (
                 <>
                   <Nav className="pipe-separate mgL t-light-green left">
-                    <Button className="nav-link" onClick={logOutHandler} variant="light">
+                    <Button className="nav-link" onClick={logOutHandler} variant="link">
                       Logout
                     </Button>
                   </Nav>

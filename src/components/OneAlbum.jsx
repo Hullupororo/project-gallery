@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import MyPhotoCarousel from './MyPhotoCarousel';
 
@@ -13,37 +13,52 @@ export default function OneAlbum() {
       .then((data) => setPhotos(data));
   }, []);
 
-  const navigate = useNavigate();
+  // buttons
+
+  const addAlbumHandler = (e) => {
+    e.preventDefault();
+    fetch('/api/newalbum', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(),
+    })
+      .then((res) => {
+        setAlbums((prev) => [...prev, res.data]);
+      });
+  };
 
   return (
     <>
-      <>
-        <div className="buttons">
-          <Button
-            variant="dark"
-            onClick={() => navigate(`/album/photo_edit/${id}`)}
-          >
-            Добавить фото
 
-          </Button>
-          <Button
-            variant="dark"
-            onClick={() => navigate(`/album/edit/${id}`)}
-          >
-            Редактировать альбом
+      <div className="buttons">
+        <button
+          className="onebutton"
+          variant="dark"
+          onClick={addAlbumHandler}
+        >
+          Add Photo
 
-          </Button>
-        </div>
-        <h1>Фотографии</h1>
-        <Carousel cols={2} rows={2} gap={20} loop>
-          {photos.map((photo) => (
-            <Carousel.Item>
-              <MyPhotoCarousel key={photo.id} photo={photo} />
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </>
+        </button>
+        <button
+          className="onebutton"
+          variant="dark"
+          onClick={addAlbumHandler}
+        >
+          Edit Album
 
+        </button>
+      </div>
+      <h1>Фотографии</h1>
+      <Carousel cols={2} rows={2} gap={20} loop>
+        {photos.map((photo) => (
+          <Carousel.Item>
+            <MyPhotoCarousel key={photo.id} photo={photo} />
+          </Carousel.Item>
+        ))}
+      </Carousel>
     </>
+
   );
 }
