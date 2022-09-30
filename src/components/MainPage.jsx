@@ -35,15 +35,16 @@ export default function MainPage({
           />
         </div>
         <Carousel className="carousel" cols={3} rows={1} gap={20} loop>
-          {myAlbums.map((album) => (
-            <Carousel.Item>
-              {myAlbums.length !== 0
-                ? (<MyCarousel key={album.id} album={album} />)
-                : (<div className="none" />)}
-              {' '}
-              (// Даша это тебе задать высоту)
-            </Carousel.Item>
-          ))}
+          {myAlbums.length !== 0
+            ? (myAlbums.map((album) => (
+              <Carousel.Item>
+                (
+                <MyCarousel key={album.id} album={album} />
+                )
+                {' '}
+              </Carousel.Item>
+            )))
+            : (<Carousel.Item><div className="none"> No Albums</div></Carousel.Item>)}
         </Carousel>
       </>
       )}
