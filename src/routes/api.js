@@ -2,6 +2,7 @@ import { Router } from 'express';
 import bcrypt from 'bcrypt';
 import multer from 'multer';
 import { User, Album, Photo } from '../../db/models';
+import { deleteProtect } from '../middlewares/index';
 
 const path = require('path');
 
@@ -24,6 +25,7 @@ router.post('/photos/:id', upload.single('avatar'), async (req, res, next) => {
   next();
 });
 
+
 router.get('/onealbum/:id', async (req, res) => {
   const { id } = req.params;
   const oneAlbum = await Album.findOne({ where: { id } });
@@ -40,15 +42,18 @@ router.route('/albums')
     res.json(newAlbum);
   });
 
-router.post('/albums/:id', async (req, res) => {
-  console.log(req.body);
-  await Album.update({
-    ...req.body,
-  }, { where: { id: req.params.id } });
-  const allAlbums = await Album.findAll({ where: { status: true, userid: res.locals.user.id }, include: [{ model: Photo }], order: [['id', 'DESC']] });
 
-  res.json(allAlbums);
-});
+router.route('/albums/:id')
+  .post(async (req, res) => {
+    const all = await Album.update({
+      ...req.body,
+    }, { where: { id: req.params.id } });
+    res.sendStatus(200);
+  })
+  .delete(deleteProtect, async (req, res) => {
+    await Album.destroy({ where: { id: req.params.id, userid: req.session.user.id } });
+    res.sendStatus(200);
+  });
 
 router.route('/photos/:id')
   .get(async (req, res) => {
