@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
-// import { Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import MyPhotoCarousel from './MyPhotoCarousel';
 import AddPhoto from './AddPhoto';
 
-export default function OneAlbum({ currUser, myAlbums }) {
+export default function OneAlbum({ currUser }) {
   const [photos, setPhotos] = useState([]);
   const [currAlbum, setCurrAlbum] = useState({});
   const { id } = useParams();
@@ -15,7 +15,7 @@ export default function OneAlbum({ currUser, myAlbums }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(currUser.id , currAlbum.userid);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/api/photos/${id}`)
@@ -27,22 +27,6 @@ export default function OneAlbum({ currUser, myAlbums }) {
           .then((data) => setCurrAlbum(data)),
       );
   }, [show]);
-
-  // buttons
-
-  const addAlbumHandler = (e) => {
-    e.preventDefault();
-    fetch('/api/newalbum', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(),
-    })
-      .then((res) => {
-        setAlbums((prev) => [...prev, res.data]);
-      });
-  };
 
   return (
 

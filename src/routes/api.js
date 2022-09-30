@@ -41,16 +41,19 @@ router.route('/albums')
   });
 
 router.post('/albums/:id', async (req, res) => {
-  const all = await Album.update({
+  console.log(req.body);
+  await Album.update({
     ...req.body,
   }, { where: { id: req.params.id } });
-  res.sendStatus(200);
+  const allAlbums = await Album.findAll({ where: { status: true, userid: res.locals.user.id }, include: [{ model: Photo }], order: [['id', 'DESC']] });
+
+  res.json(allAlbums);
 });
 
 router.route('/photos/:id')
   .get(async (req, res) => {
     const { id } = req.params;
-    const photos = await Photo.findAll({ where: { albumid: id } });
+    const photos = await Photo.findAll({ where: { albumid: id }, order: [['id', 'DESC']] });
     res.json(photos);
   });
 
