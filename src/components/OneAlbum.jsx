@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
-// import { Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import MyPhotoCarousel from './MyPhotoCarousel';
 import AddPhoto from './AddPhoto';
 
 export default function OneAlbum({ currUser, myAlbums }) {
+  const navigate = useNavigate();
   const [photos, setPhotos] = useState([]);
   const [currAlbum, setCurrAlbum] = useState({});
   const { id } = useParams();
@@ -15,7 +16,7 @@ export default function OneAlbum({ currUser, myAlbums }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(currUser.id , currAlbum.userid);
+  console.log(currUser.id, currAlbum.userid);
 
   useEffect(() => {
     fetch(`/api/photos/${id}`)
@@ -43,7 +44,10 @@ export default function OneAlbum({ currUser, myAlbums }) {
         setAlbums((prev) => [...prev, res.data]);
       });
   };
-
+  const deleteHandler = () => {
+    fetch(`/api/entries/${id}`, { method: 'delete' })
+      .then(() => navigate('/'));
+  };
   return (
 
     <>
@@ -52,18 +56,28 @@ export default function OneAlbum({ currUser, myAlbums }) {
       <div className="buttons">
 
         <Button
+          className="buttons"
           variant="dark"
           onClick={handleShow}
         >
-          Добавить фото
+          Add Photo
 
         </Button>
 
         <Button
+          className="buttons"
           variant="dark"
           onClick={() => navigate(`/album/edit/${id}`)}
         >
-          Редактировать альбом
+          Edit Album
+
+        </Button>
+        <Button
+          className="buttons"
+          variant="dark"
+          onClick={deleteHandler}
+        >
+          Delete Album
 
         </Button>
       </div>
@@ -82,7 +96,7 @@ export default function OneAlbum({ currUser, myAlbums }) {
         </Modal.Footer>
       </Modal>
 
-      <h1>Фотографии</h1>
+      <h1>Photos</h1>
       <Carousel cols={2} rows={2} gap={20} loop>
         {photos.map((photo) => (
           <Carousel.Item>

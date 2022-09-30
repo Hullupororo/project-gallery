@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 export default function Albulmsetting() {
   const [album, setAlbum] = useState({});
@@ -50,7 +51,7 @@ export default function Albulmsetting() {
       <div className="col">
         <form onSubmit={submitHandler}>
           <div className="mb-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">Название альбома</label>
+            <label htmlFor="exampleFormControlInput1" className="form-label">Album Title</label>
             <input
               value={input.title}
               onChange={inputHandler}
@@ -62,20 +63,20 @@ export default function Albulmsetting() {
             />
           </div>
 
-          <p>Доступ</p>
+          <p>Access Settings</p>
           <div className="form-check">
             <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="me" />
             <label className="form-check-label" htmlFor="flexRadioDefault1">
-              Только мне
+              Private
             </label>
           </div>
           <div className="form-check">
             <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="all" checked />
             <label className="form-check-label" htmlFor="flexRadioDefault2">
-              Всем
+              Public
             </label>
           </div>
-          <button type="submit">сохранить</button>
+          <Button className="margin" type="submit" variant="dark">Save</Button>
         </form>
       </div>
     </div>
