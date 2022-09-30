@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+
 
 export default function AddPhoto({ handleClose, setAllAlbums, setMyAlbums }) {
   const param = useParams();
@@ -20,7 +22,7 @@ export default function AddPhoto({ handleClose, setAllAlbums, setMyAlbums }) {
       {' '}
       <form ref={form} onSubmit={submitHandler}>
         <input type="file" name="avatar" />
-        <button type="submit">UPLOAD</button>
+        <Button className="buttons" type="submit">Upload</Button>
       </form>
     </div>
   );

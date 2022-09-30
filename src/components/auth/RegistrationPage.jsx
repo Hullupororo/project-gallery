@@ -68,6 +68,7 @@ export default function RegistrationPage({ setCurrUser, setMyAlbums }) {
       <Button variant="dark" type="submit">
         Sign Up
       </Button>
+
     </Form>
   );
 }

@@ -6,7 +6,10 @@ import Modal from 'react-bootstrap/Modal';
 import MyPhotoCarousel from './MyPhotoCarousel';
 import AddPhoto from './AddPhoto';
 
-export default function OneAlbum({ currUser }) {
+
+export default function OneAlbum({ currUser, myAlbums }) {
+  const navigate = useNavigate();
+
   const [photos, setPhotos] = useState([]);
   const [currAlbum, setCurrAlbum] = useState({});
   const { id } = useParams();
@@ -14,8 +17,6 @@ export default function OneAlbum({ currUser }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/api/photos/${id}`)
@@ -28,6 +29,23 @@ export default function OneAlbum({ currUser }) {
       );
   }, [show]);
 
+  const addAlbumHandler = (e) => {
+    e.preventDefault();
+    fetch('/api/newalbum', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(),
+    })
+      .then((res) => {
+        setAlbums((prev) => [...prev, res.data]);
+      });
+  };
+  const deleteHandler = () => {
+    fetch(`/api/entries/${id}`, { method: 'delete' })
+      .then(() => navigate('/'));
+  };
   return (
 
     <>
@@ -36,18 +54,28 @@ export default function OneAlbum({ currUser }) {
       <div className="buttons">
 
         <Button
+          className="buttons"
           variant="dark"
           onClick={handleShow}
         >
-          Добавить фото
+          Add Photo
 
         </Button>
 
         <Button
+          className="buttons"
           variant="dark"
           onClick={() => navigate(`/album/edit/${id}`)}
         >
-          Редактировать альбом
+          Edit Album
+
+        </Button>
+        <Button
+          className="buttons"
+          variant="dark"
+          onClick={deleteHandler}
+        >
+          Delete Album
 
         </Button>
       </div>
@@ -66,7 +94,7 @@ export default function OneAlbum({ currUser }) {
         </Modal.Footer>
       </Modal>
 
-      <h1>Фотографии</h1>
+      <h1 className="photo">Photos</h1>
       <Carousel cols={2} rows={2} gap={20} loop>
         {photos.map((photo) => (
           <Carousel.Item>
