@@ -6,7 +6,7 @@ import React from 'react';
 function MyNavBar({ currUser, logOutHandler }) {
   return (
     <Navbar className="navbar" bg="light" expand="lg">
-      <Container>
+      <Container className="header">
         <Navbar.Brand>
           {' '}
           <NavLink className="logo" to="/">Gallery</NavLink>
@@ -15,7 +15,7 @@ function MyNavBar({ currUser, logOutHandler }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="nav-link">
-            {currUser.id ? currUser.name : 'Hello, photographer!'}
+            {currUser.id ? `of ${currUser.name}` : 'Hello, photographer!'}
           </Nav>
 
           <Nav className="me-auto">

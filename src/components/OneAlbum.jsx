@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
-import MyPhotoCarousel from './MyCarousel';
+import MyPhotoCarousel from './MyPhotoCarousel';
 
 export default function OneAlbum() {
   const [photos, setPhotos] = useState([]);
   const { id } = useParams();
-
   useEffect(() => {
     fetch(`/api/photos/${id}`)
       .then((res) => res.json())
@@ -32,38 +31,34 @@ export default function OneAlbum() {
 
   return (
     <>
-      <>
-        <div className="buttons">
 
-          <Button
-            variant="dark"
-            onClick={addAlbumHandler}
-          >
-            Добавить фото
+      <div className="buttons">
+        <button
+          className="onebutton"
+          variant="dark"
+          onClick={addAlbumHandler}
+        >
+          Add Photo
 
-          </Button>
-          <Button
-            variant="dark"
-            onClick={addAlbumHandler}
-          >
-            Редактировать альбом
+        </button>
+        <button
+          className="onebutton"
+          variant="dark"
+          onClick={addAlbumHandler}
+        >
+          Edit Album
 
-          </Button>
-        </div>
-        <h1>Фотографии</h1>
-        <Carousel cols={2} rows={2} gap={20} loop>
-          {photos.map((photo) => (
-            <Carousel.Item>
-              <Link to="/dsfgfsfgds">
-                <Carousel.Item>
-                  <MyPhotoCarousel key={photo.id} album={photo} />
-                </Carousel.Item>
-              </Link>
-            </Carousel.Item>
-          ))}
-        </Carousel>
-      </>
-
+        </button>
+      </div>
+      <h1>Фотографии</h1>
+      <Carousel cols={2} rows={2} gap={20} loop>
+        {photos.map((photo) => (
+          <Carousel.Item>
+            <MyPhotoCarousel key={photo.id} photo={photo} />
+          </Carousel.Item>
+        ))}
+      </Carousel>
     </>
+
   );
 }
