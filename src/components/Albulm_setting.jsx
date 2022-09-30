@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 export default function Albulmsetting() {
   const [album, setAlbum] = useState({});
   const [input, setInput] = useState({
-    title: '' || album.title,
-    status: true || album.status,
+    title: album.title || '',
+    status: album.status || true,
   });
   console.log(input);
   const params = useParams();
