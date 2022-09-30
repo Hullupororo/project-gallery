@@ -48,9 +48,9 @@ export default function MainPage({
           {myAlbums.length !== 0
             ? (myAlbums.map((album) => (
               <Carousel.Item>
-                (
+
                 <MyCarousel key={album.id} album={album} />
-                )
+
                 {' '}
               </Carousel.Item>
             )))
