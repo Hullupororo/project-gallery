@@ -41,7 +41,6 @@ router.route('/albums')
   });
 
 router.post('/albums/:id', async (req, res) => {
-  console.log(req.body);
   await Album.update({
     ...req.body,
   }, { where: { id: req.params.id } });
