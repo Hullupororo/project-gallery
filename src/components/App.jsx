@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { Route, Routes } from 'react-router-dom';
 import AuthPage from './auth/AuthPage';
@@ -10,7 +10,17 @@ import AddPhoto from './AddPhoto';
 import Albumsetting from './Albulm_setting';
 
 export default function App({ user, albums }) {
+  const [myAlbums, setMyAlbums] = useState([]);
+  const [allAlbums, setAllAlbums] = useState([]);
   const [currUser, setCurrUser] = useState(user || {});
+  useEffect(() => {
+    fetch('/api/albums')
+      .then((res) => res.json())
+      .then((data) => {
+        setAllAlbums(data);
+        setMyAlbums(data.filter((el) => el.userid === currUser.id));
+      });
+  }, []);
 
   const logOutHandler = () => {
     fetch('/api/auth/logout')
@@ -20,8 +30,28 @@ export default function App({ user, albums }) {
     <Container>
       <MyNavBar currUser={currUser} logOutHandler={logOutHandler} />
       <Routes>
-        <Route path="/" element={<MainPage albums={albums} currUser={currUser} />} />
-        <Route path="/album/:id" element={<OneAlbum />} />
+        <Route
+          path="/"
+          element={(
+            <MainPage
+              albums={albums}
+              currUser={currUser}
+              myAlbums={myAlbums}
+              setMyAlbums={setMyAlbums}
+              allAlbums={allAlbums}
+              setAllAlbums={setAllAlbums}
+            />
+)}
+        />
+        <Route
+          path="/album/:id"
+          element={(
+            <OneAlbum
+              currUser={currUser}
+              myAlbums={myAlbums}
+            />
+)}
+        />
         <Route path="/album/photos" element={<AddPhoto />} />
 
         <Route path="/album/edit/:id" element={<Albumsetting />} />
