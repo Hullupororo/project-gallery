@@ -40,6 +40,13 @@ router.route('/albums')
     res.json(newAlbum);
   });
 
+router.post('/albums/:id', async (req, res) => {
+  const all = await Album.update({
+    ...req.body,
+  }, { where: { id: req.params.id } });
+  res.sendStatus(200);
+});
+
 router.route('/photos/:id')
   .get(async (req, res) => {
     const { id } = req.params;

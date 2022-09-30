@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'better-react-carousel';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import MyPhotoCarousel from './MyPhotoCarousel';
@@ -28,7 +28,21 @@ export default function OneAlbum({ currUser, myAlbums }) {
       );
   }, [show]);
 
-  const navigate = useNavigate();
+  // buttons
+
+  const addAlbumHandler = (e) => {
+    e.preventDefault();
+    fetch('/api/newalbum', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(),
+    })
+      .then((res) => {
+        setAlbums((prev) => [...prev, res.data]);
+      });
+  };
 
   return (
 

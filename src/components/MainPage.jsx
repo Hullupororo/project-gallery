@@ -26,13 +26,15 @@ export default function MainPage({
       {currUser.id
       && (
       <>
-        <Button
-          className="addButton"
-          variant="dark"
-          onClick={addAlbumHandler}
-        />
-        <h1 className="myalbum">Мои альбомы</h1>
-        <Carousel cols={3} rows={1} gap={20} loop>
+        <div className="head">
+          <h1 className="myalbum">My Albums</h1>
+          <Button
+            className="addButton"
+            variant="dark"
+            onClick={addAlbumHandler}
+          />
+        </div>
+        <Carousel className="carousel" cols={3} rows={1} gap={20} loop>
           {myAlbums.map((album) => (
             <Carousel.Item>
               {myAlbums.length !== 0
@@ -45,8 +47,9 @@ export default function MainPage({
         </Carousel>
       </>
       )}
-
-      <h1>Все альбомы</h1>
+      <div className="head">
+        <h1>All Albums </h1>
+      </div>
       <Carousel cols={3} rows={1} gap={20} loop>
         {allAlbums.map((album) => (
           <Carousel.Item>
