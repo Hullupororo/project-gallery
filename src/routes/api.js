@@ -74,6 +74,7 @@ router.route('/photos/:id')
 
 router.route('/takephoto/:link')
   .get(async (req, res) => {
+  
     res.sendFile(path.join(__dirname, `../../img/${req.params.link}`));
   });
 

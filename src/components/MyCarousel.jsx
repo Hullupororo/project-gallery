@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 export default function MyCarousel({ album }) {
   return (
     <>
-      <h3>{album.title}</h3>
+    <div className='titlehead'>
+      <h3 className='title'>{album.title}</h3>
+      </div>
       <Link to={`album/${album.id}`}>
         <Carousel.Item>
           <div>

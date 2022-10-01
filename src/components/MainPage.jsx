@@ -70,13 +70,19 @@ export default function MainPage({
       <div className="head">
         <h1>All Albums </h1>
       </div>
-      <Carousel cols={3} rows={1} gap={20} loop>
-        {allAlbums.map((album) => (
-          <Carousel.Item>
-            <MyCarousel key={album.id} album={album} />
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      <Carousel className="carousel" cols={3} rows={1} gap={20} loop>
+
+          {allAlbums?.length !== 0
+            ? (allAlbums?.map((album) => (
+              <Carousel.Item>
+                
+                <MyCarousel key={album.id} album={album} />
+                
+                {' '}
+              </Carousel.Item>
+            )))
+            : (<Carousel.Item><div className="none"> No Albums</div></Carousel.Item>)}
+        </Carousel>
     </>
   );
 }
