@@ -1,3 +1,4 @@
+
 .nav-link {
 font-size: large;
 text-align: right;
@@ -18,8 +19,13 @@ font-weight:lighter;
 font-style: oblique;
 color: #91919179;
 }
+
+.row {
+    margin: 100px;
+}
 .photo {
     margin-bottom: 30px;
+    margin-left: 40px;
 }
 .main-blok {
     width: 100%;
@@ -29,13 +35,25 @@ color: #91919179;
     color: black;
     text-decoration: none;
     font-size: 70px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif
-    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-left: 30px;
 }
 .Carousel__ItemSet-sc-hyhecw-3 img:hover {
     transition: opacity .5s linear;
     transform: scale(1.05);
     opacity: 0.7;
+
+}
+.title {
+    margin-bottom: 30px;
+}
+.titlehead {
+    display: flex;
+    justify-content: center;
+}
+
+.Carousel__ItemSet-sc-hyhecw-3 img{
+    object-fit: contain;
 
 }
 .Carousel__ItemSet-sc-hyhecw-3{
@@ -71,9 +89,9 @@ color: #91919179;
     width: 500px;
     display: flex;
     flex-direction: column;
-    align-content: center;
+    justify-content: center;
     position: relative;
-    right: -382px;
+    left: 600px;
 }
 .addButton {
     --b: 4px; /* the thickness */
@@ -93,6 +111,8 @@ color: #91919179;
 .head {
     display: flex;
     justify-content: space-between;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 .buttons {
     display: flex;
@@ -122,19 +142,10 @@ color: #91919179;
    text-align: center;
    margin-bottom: 40px;
 }
-/* .btn-dark {
-    width: 400px;
-} */
-      
-/* .header {
-color: red;
-} */
+
 .oneButton {
     width: 50px;
 }
-/* .container {
-    width: 100%;
-} */
 
 .margin {
     margin-top: 25px

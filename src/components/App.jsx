@@ -38,7 +38,7 @@ export default function App({ user, albums }) {
       .then(() => setCurrUser({}));
   };
   return (
-    <Container>
+    <Container fluid style={{padding: "0"}}>
       <MyNavBar currUser={currUser} logOutHandler={logOutHandler} />
       <Routes>
         <Route

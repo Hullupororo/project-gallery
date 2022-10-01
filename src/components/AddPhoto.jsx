@@ -18,7 +18,7 @@ export default function AddPhoto({ handleClose, setAllAlbums, setMyAlbums }) {
         handleClose();
         res.json()
       })
-      // .then(handleClose());
+
   };
   return (
     <div>

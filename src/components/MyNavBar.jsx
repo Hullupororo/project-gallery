@@ -5,8 +5,8 @@ import React from 'react';
 
 function MyNavBar({ currUser, logOutHandler }) {
   return (
-    <Navbar className="navbar" expand="lg">
-      <Container className="header">
+    
+        <Navbar className="navbar">
         <Navbar.Brand>
           {' '}
           <NavLink className="logo" to="/">Gallery</NavLink>
@@ -38,8 +38,8 @@ function MyNavBar({ currUser, logOutHandler }) {
               )}
           </Nav>
         </Navbar.Collapse>
-      </Container>
     </Navbar>
+    
   );
 }
 

@@ -44,7 +44,7 @@ export default function Albulmsetting({ setAllAlbums, setMyAlbums }) {
   return (
     <div className="row">
       <div className="col">
-        <form onSubmit={submitHandler}>
+        <form onSubmit={submitHandler} >
           <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Album Title</label>
             <input
